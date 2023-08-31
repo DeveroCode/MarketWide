@@ -1,9 +1,16 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView, RouterLink } from 'vue-router'
+import favicon from '../assets/imgs/favicon.png'
+import Footer from '../components/Footer.vue';
 </script>
 
 <template>
-    <h1>Auth Father</h1>
-
-    <RouterView />
+    <div>
+        <RouterLink :to="{ name: 'home' }">
+            <img :src="favicon" alt="logotipo" class="mx-auto w-80">
+        </RouterLink>
+    </div>
+    <main class="mx-auto h-96">
+        <RouterView />
+    </main>
 </template>
