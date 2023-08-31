@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { RouterLink } from 'vue-router'
 import favicon from '../assets/imgs/favicon-white.png'
 import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
 
@@ -21,9 +22,9 @@ const toggleMenu = () => {
     <header class="bg-secondary py-5">
         <div class="flex items-center mx-5 md:mx-12 lg:mx-16">
             <div class="flex w-full flex-col md:flex-row md:justify-between items-center">
-                <a href="#">
+                <RouterLink :to="{ name: 'home' }">
                     <img :src="favicon" alt="logotipo" class="mx-auto w-40 md:w-32">
-                </a>
+                </RouterLink>
                 <div class="flex md:block md:mx-auto space-x-12 md:space-x-0">
                     <div class="pt-2 relative mx-auto text-gray-600">
                         <input
@@ -52,9 +53,9 @@ const toggleMenu = () => {
             <div id="mobile-menu" class="top-0 h-screen bg-secondary w-3/5 z-50 p-10 fixed right-0 block md:hidden"
                 :class="['fixed', { 'scale-in-hor-right': openMenu, 'scale-in-hor-left': !openMenu }, openMenu ? 'block' : 'scale-in-hor-left hidden']">
                 <div class="flex space-x-11 items-center justify-center mb-12">
-                    <a href="#">
+                    <RouterLink :to="{ name: 'home' }">
                         <img :src="favicon" alt="logotipo" class="sm:w-32 md:64">
-                    </a>
+                    </RouterLink>
                     <!-- Close Button -->
                     <div class="flex justify-end mb-5">
                         <button id="close-button"
@@ -65,23 +66,23 @@ const toggleMenu = () => {
                 </div>
 
                 <nav class="flex flex-col text-white text-xl space-y-3">
-                    <a href="#">Iniciar Sesión</a>
-                    <a href="#">Soporte</a>
-                    <a href="#" class="text-white font-bold flex items-center">
+                    <RouterLink :to="{ name: 'login' }">Iniciar Sesión</RouterLink>
+                    <RouterLink :to="{ name: 'register' }">Soporte</RouterLink>
+                    <RouterLink :to="{ name: 'register' }" class="text-white font-bold flex items-center">
                         <ShoppingCartIcon class="w-8 h-8" aria-label="true" />
                         Carrito
-                    </a>
+                    </RouterLink>
                 </nav>
             </div>
 
 
             <nav class="hidden md:flex md:space-x-16 md:items-center md:ml-6">
-                <a href="#" class="text-white font-bold">Login</a>
-                <a href="#" class="text-white font-bold">Soporte</a>
-                <a href="#" class="text-white font-bold flex items-center">
+                <RouterLink class="text-white font-bold" :to="{ name: 'login' }">Iniciar</RouterLink>
+                <RouterLink class="text-white font-bold" :to="{ name: 'register' }">Soporte</RouterLink>
+                <RouterLink class="text-white font-bold flex items-center" :to="{ name: 'register' }">
                     <ShoppingCartIcon class="w-8 h-8" aria-label="true" />
                     Carrito
-                </a>
+                </RouterLink>
             </nav>
         </div>
     </header>
