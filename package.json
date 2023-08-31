@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@heroicons/vue": "^2.0.18",
+    "vuetify": "^3.3.14"
+  }
+}
