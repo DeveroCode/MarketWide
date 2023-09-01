@@ -1,20 +1,10 @@
 <script setup>
-import { ref, watch } from 'vue';
 import { RouterLink } from 'vue-router'
 import favicon from '../assets/imgs/favicon-white.png'
 import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
+import { useMenuMobile } from '../stores/menu.js'
 
-
-const openMenu = ref(false);
-// const animation = ref('');
-
-const toggleMenu = () => {
-    openMenu.value = !openMenu.value
-};
-
-// watch(openMenu, () => {
-//     animation.value = openMenu.value ? 'scale-in-hor-right' : 'scale-in-hor-left'
-// });
+const button = useMenuMobile();
 
 </script>
 
@@ -43,7 +33,7 @@ const toggleMenu = () => {
                     <div class="flex md:hidden items-center">
                         <button id="hamburger-button"
                             class="text-primary text-4xl font-bold opacity-70 hover:opacity-100 duration-300 focus:outline-none"
-                            @click="toggleMenu()">
+                            @click="button.handleClickMenu()">
                             ☰ </button>
                     </div>
                 </div>
@@ -51,7 +41,7 @@ const toggleMenu = () => {
 
 
             <div id="mobile-menu" class="top-0 h-screen bg-secondary w-3/5 z-50 p-10 fixed right-0 block md:hidden"
-                :class="['fixed', { 'scale-in-hor-right': openMenu, 'scale-in-hor-left': !openMenu }, openMenu ? 'block' : 'scale-in-hor-left hidden']">
+                :class="['fixed', button.menu ? 'scale-in-hor-right' : 'slide-right']">
                 <div class="flex space-x-11 items-center justify-center mb-12">
                     <RouterLink :to="{ name: 'home' }">
                         <img :src="favicon" alt="logotipo" class="sm:w-32 md:64">
@@ -60,7 +50,7 @@ const toggleMenu = () => {
                     <div class="flex justify-end mb-5">
                         <button id="close-button"
                             class="text-white text-xl font-bold opacity-70 hover:opacity-100 duration-300 focus:outline-none"
-                            @click="toggleMenu()"> X
+                            @click="button.handleClickMenu()"> X
                         </button>
                     </div>
                 </div>
@@ -94,9 +84,9 @@ const toggleMenu = () => {
     animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-.scale-in-hor-left {
-    -webkit-animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+.slide-right {
+    -webkit-animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 @-webkit-keyframes scale-in-hor-right {
@@ -135,39 +125,53 @@ const toggleMenu = () => {
     }
 }
 
-@-webkit-keyframes scale-in-hor-left {
+@-webkit-keyframes slide-right {
     0% {
-        -webkit-transform: scaleX(0);
-        transform: scaleX(0);
-        -webkit-transform-origin: 0% 0%;
-        transform-origin: 0% 0%;
-        opacity: 1;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
     }
 
     100% {
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
-        -webkit-transform-origin: 0% 0%;
-        transform-origin: 0% 0%;
-        opacity: 1;
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
     }
 }
 
-@keyframes scale-in-hor-left {
+@keyframes slide-right {
     0% {
-        -webkit-transform: scaleX(0);
-        transform: scaleX(0);
-        -webkit-transform-origin: 0% 0%;
-        transform-origin: 0% 0%;
-        opacity: 1;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
     }
 
     100% {
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
-        -webkit-transform-origin: 0% 0%;
-        transform-origin: 0% 0%;
-        opacity: 1;
+        -webkit-transform: translateX(400px);
+        transform: translateX(400px);
+    }
+}
+
+@media (max-width: 768px) {
+    @-webkit-keyframes slide-right {
+        0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        100% {
+            -webkit-transform: translateX(500px);
+            transform: translateX(500px);
+        }
+    }
+
+    @keyframes slide-right {
+        0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        100% {
+            -webkit-transform: translateX(500px);
+            transform: translateX(500px);
+        }
     }
 }
 </style>
