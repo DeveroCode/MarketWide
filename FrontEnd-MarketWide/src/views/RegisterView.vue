@@ -10,20 +10,22 @@ import { RouterLink } from 'vue-router';
                 <h1 class="font-bold text-2xl">Registrarse</h1>
             </div>
             <!-- For -->
-            <form class="flex flex-col text-sm rounded-md">
+            <form class="flex flex-col text-sm rounded-md" novalidate>
                 <input class="mb-5 rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-headers"
-                    type="text" placeholder="Email" />
+                    type="text" placeholder="Email" name="email" />
 
                 <input class="border mb-5 rounded-[4px] p-3 hover:outline-none focus:outline-none hover:border-headers"
-                    type="password" placeholder="Password" />
+                    type="password" placeholder="Password" name="password" />
                 <input class="border mb-5 rounded-[4px] p-3 hover:outline-none focus:outline-none hover:border-headers"
-                    type="password" placeholder="Repetir password" />
+                    type="password" placeholder="Repetir password" name="password_confirmation" />
 
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Seleccion tu
+                <label for="type_user_label"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Seleccion tu
                     tipo de
                     usuario</label>
                 <select id="countries"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    name="type_user">
                     <option selected>Usuario</option>
                     <option value="">Vendedor</option>
                     <option value="US">Comprador</option>
