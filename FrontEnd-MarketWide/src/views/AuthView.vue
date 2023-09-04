@@ -1,7 +1,6 @@
 <script setup>
 import { RouterView, RouterLink } from 'vue-router'
 import favicon from '../assets/imgs/favicon.png'
-import Footer from '../components/Footer.vue';
 </script>
 
 <template>

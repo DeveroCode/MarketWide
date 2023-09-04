@@ -9,12 +9,15 @@ const auth = computed(() => {
 });
 // Components
 import Header from './components/Header.vue';
+import Alert from './components/Alert.vue';
 </script>
 
 <template>
   <!-- Header -->
   <Header v-if="!auth" />
   <RouterView />
+
+  <Alert />
 </template>
 
 <style scoped></style>

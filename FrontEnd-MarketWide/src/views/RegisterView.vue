@@ -1,5 +1,33 @@
 <script setup>
+import { ref, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
+import clienteApi from '../lib/axios'
+import { userMethods } from '../stores/userMethods.js';
+import Alert from '../components/Alert.vue';
+const { userRegister } = userMethods();
+
+// Errores
+const errores = ref({});
+
+const user = reactive({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+    type_user: '',
+});
+
+const handleSubmit = async () => {
+    const datos = {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        password_confirmation: user.password_confirmation,
+        type_user_id: user.type_user
+    }
+
+    userRegister(datos, errores);
+};
 </script>
 
 <template>
@@ -10,14 +38,17 @@ import { RouterLink } from 'vue-router';
                 <h1 class="font-bold text-2xl">Registrarse</h1>
             </div>
             <!-- For -->
-            <form class="flex flex-col text-sm rounded-md" novalidate>
+            <form class="flex flex-col text-sm rounded-md" @submit.prevent="handleSubmit" novalidate>
                 <input class="mb-5 rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-headers"
-                    type="text" placeholder="Email" name="email" />
+                    type="text" placeholder="Nombre" name="name" v-model="user.name" />
+                <input class="mb-5 rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-headers"
+                    type="text" placeholder="Email" name="email" v-model="user.email" />
 
                 <input class="border mb-5 rounded-[4px] p-3 hover:outline-none focus:outline-none hover:border-headers"
-                    type="password" placeholder="Password" name="password" />
+                    type="password" placeholder="Password" name="password" v-model="user.password" />
                 <input class="border mb-5 rounded-[4px] p-3 hover:outline-none focus:outline-none hover:border-headers"
-                    type="password" placeholder="Repetir password" name="password_confirmation" />
+                    type="password" placeholder="Repetir password" name="password_confirmation"
+                    v-model="user.password_confirmation" />
 
                 <label for="type_user_label"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Seleccion tu
@@ -25,23 +56,30 @@ import { RouterLink } from 'vue-router';
                     usuario</label>
                 <select id="countries"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                    name="type_user">
+                    name="type_user" v-model="user.type_user">
                     <option selected>Usuario</option>
                     <option value="">Vendedor</option>
                     <option value="US">Comprador</option>
                 </select>
 
+                <!-- <div v-if="errores.length">
+                    <ul>
+                        <li v-for="(error, index) in errores" :key="index">{{ error }}</li>
+                    </ul>
+                </div> -->
+
+                <!-- End Form -->
+                <input type="submit"
+                    class="mt-5 w-full border p-2 bg-gradient-to-r cursor-pointer from-secondary bg-headers text-white rounded-[4px]"
+                    value="Registrarse">
             </form>
 
-            <!-- End Form -->
-            <button class="mt-5 w-full border p-2 bg-gradient-to-r from-secondary bg-headers text-white rounded-[4px]"
-                type="submit">Registrarme</button>
             <div class="mt-5 flex justify-between text-sm text-gray-600">
                 <RouterLink :to="{ name: 'login' }">Olvidasté tu contraseña?</RouterLink>
                 <RouterLink :to="{ name: 'login' }">Inicia Sesión</RouterLink>
             </div>
             <div class="flex justify-center mt-5 text-sm">
-                <p class="text-gray-400">O Registrate</p>
+                <p type="button" class="text-gray-400">O Registrate</p>
             </div>
             <div class="mt-5 flex justify-center gap-3    ">
                 <img class="h-7 grayscale cursor-pointer hover:grayscale-0 scale-105 duration-300"
