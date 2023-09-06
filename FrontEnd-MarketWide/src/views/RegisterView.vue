@@ -7,7 +7,7 @@ import Alert from '../components/Alert.vue';
 const { userRegister } = userMethods();
 
 // Errores
-const errores = ref({});
+const errores = ref([]);
 
 const user = reactive({
     name: '',

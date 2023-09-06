@@ -16,7 +16,8 @@ const notification = useNotificationsStore();
                 leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100"
                 leave-to-class="opacity-0">
                 <div v-if="notification.mostrar"
-                    class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                    class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5"
+                    :class="{ 'bg-orange-100': notification.error, 'bg-white': !notification.error }">
                     <div class="p-4">
                         <div class="flex items-start">
                             <div class="flex-shrink-0">
@@ -27,12 +28,12 @@ const notification = useNotificationsStore();
                                 <p class="text-sm font-medium text-gray-900 uppercase">
                                     {{ notification.texto }}
                                 </p>
-                                <div class="mt-1 text-sm text-gray-500" v-if="notification.errors.length">
-                                    <li v-for="(index, error) in  notification.errors.value" :key="index">{{ error }}</li>
+                                <div v-if="notification.errors.length > 0" class="list-disc text-sm text-gray-500">
+                                    <p v-for="(error, index) in notification.errors" :key="index">{{
+                                        error
+                                    }}
+                                    </p>
                                 </div>
-                                <p class="mt-1 text-sm text-gray-500">
-                                    {{ notification.errors }}
-                                </p>
                             </div>
                             <div class="ml-4 flex flex-shrink-0">
                                 <button type="button" @click="notification.mostrar = false"

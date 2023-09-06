@@ -13,7 +13,7 @@ export const useNotificationsStore = defineStore('notification', () => {
             texto.value = ''
             error.value = false
             mostrar.value = false
-        }, 3000);
+        }, 5000);
     });
 
     return {
