@@ -25,6 +25,11 @@ const router = createRouter({
           component: () => import('../views/RegisterView.vue')
         }
       ]
+    },
+    {
+      path: '/market-wide',
+      name: 'home-market',
+      component: () => import('../views/HomeView.vue')
     }
   ]
 })
