@@ -14,11 +14,11 @@ class TypeUserSeeder extends Seeder
     {
         //'user_type' => 'vendedor'
         DB::table('type_users')->insert([
-            'type_user' => 'vendedor',
+            'type' => 'vendedor',
         ]);
 
         DB::table('type_users')->insert([
-            'type_user' => 'comprador',
+            'type' => 'comprador',
         ]);
     }
 }

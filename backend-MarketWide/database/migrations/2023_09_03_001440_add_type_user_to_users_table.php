@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->foreignId('type_user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('type_user_id')->constrained()->onDelete('cascade')->default(1);
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // delete type_user_id from users
-            $table->dropColumn('type_user_id');
+            // $table->dropColumn('type_user_id');
         });
     }
 };

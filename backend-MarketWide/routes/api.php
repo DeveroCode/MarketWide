@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Models\type_user;
+use App\Http\Controllers\type_userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 // show type_users in frontend
-Route::apiResource('/type_users', type_user::class);
+Route::apiResource('/type_users', type_userController::class);
 
 //  Authentication
 Route::post('/register', [AuthController::class, 'register']);

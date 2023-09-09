@@ -22,11 +22,21 @@ export const userMethods = defineStore('users', () => {
             })
     );
 
+    async function types(user) {
+        try {
+            const { data } = (await APIservice.type_user());
+            user.value = data.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     async function userRegister(data, errores) {
         try {
             const response = await APIservice.register(data);
             router.push({ name: 'login' });
         } catch (error) {
+            console.log(error.response.data.message);
             // Definicion de los errores
             let e = []; // Almacenamos los errores en un array de nuevo
             const erro = error.response.data.errors;
@@ -47,5 +57,6 @@ export const userMethods = defineStore('users', () => {
 
     return {
         userRegister,
+        types
     }
 });

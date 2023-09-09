@@ -1,13 +1,12 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
-import clienteApi from '../lib/axios'
 import { userMethods } from '../stores/userMethods.js';
-import Alert from '../components/Alert.vue';
-const { userRegister } = userMethods();
+const { userRegister, types } = userMethods();
 
 // Errores
 const errores = ref([]);
+const typeUser = reactive({});
 
 const user = reactive({
     name: '',
@@ -17,17 +16,25 @@ const user = reactive({
     type_user: '',
 });
 
-const handleSubmit = async () => {
-    const datos = {
+const handleSubmit = () => {
+    const data = {
         name: user.name,
         email: user.email,
         password: user.password,
         password_confirmation: user.password_confirmation,
-        type_user_id: user.type_user
+        type: user.type_user
     }
-
-    userRegister(datos, errores);
+    userRegister(data, errores);
+    // console.log(data);
 };
+
+const typeUsers = () => {
+    types(typeUser);
+}
+
+onMounted(() => {
+    typeUsers();
+});
 </script>
 
 <template>
@@ -42,7 +49,7 @@ const handleSubmit = async () => {
                 <input class="mb-5 rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-headers"
                     type="text" placeholder="Nombre" name="name" v-model="user.name" />
                 <input class="mb-5 rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-headers"
-                    type="text" placeholder="Email" name="email" v-model="user.email" />
+                    type="email" placeholder="Email" name="email" v-model="user.email" />
 
                 <input class="border mb-5 rounded-[4px] p-3 hover:outline-none focus:outline-none hover:border-headers"
                     type="password" placeholder="Password" name="password" v-model="user.password" />
@@ -54,19 +61,14 @@ const handleSubmit = async () => {
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Seleccion tu
                     tipo de
                     usuario</label>
-                <select id="countries"
+                <select id="type_user_front"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     name="type_user" v-model="user.type_user">
-                    <option selected>Usuario</option>
-                    <option value="">Vendedor</option>
-                    <option value="US">Comprador</option>
+                    <option value="">Selecciona tu tipo de usuario</option>
+                    <option v-for="user in typeUser.value" :key="user.id" :value="user.id"> {{
+                        user.type }} </option>
                 </select>
 
-                <!-- <div v-if="errores.length">
-                    <ul>
-                        <li v-for="(error, index) in errores" :key="index">{{ error }}</li>
-                    </ul>
-                </div> -->
 
                 <!-- End Form -->
                 <input type="submit"

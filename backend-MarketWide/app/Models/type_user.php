@@ -9,11 +9,11 @@ class type_user extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type_user'];
+    protected $fillable = ['type'];
 
     // connection with foreing with type_user_table
     public function user()
     {
-        return $this->hasMany(User::class, 'user_id');
+        return $this->hasMany(User::class);
     }
 }

@@ -18,6 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
@@ -46,7 +47,7 @@ class User extends Authenticatable
     ];
 
     // connection with foreing with type_user_table
-    public function type_users()
+    public function type()
     {
         return $this->belongsTo(type_user::class);
     }
