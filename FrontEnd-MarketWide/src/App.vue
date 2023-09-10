@@ -16,7 +16,6 @@ import Alert from './components/Alert.vue';
   <!-- Header -->
   <Header v-if="!auth" />
   <RouterView />
-
   <Alert />
 </template>
 
