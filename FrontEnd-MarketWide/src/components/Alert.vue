@@ -37,9 +37,9 @@ const notification = useNotificationsStore();
                             </div>
                             <div class="ml-4 flex flex-shrink-0">
                                 <button type="button" @click="notification.mostrar = false"
-                                    class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                    class="inline-flex rounded-md bg-red-200 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                     <span class="sr-only">Close</span>
-                                    <XMarkIcon class="h-5 w-5" aria-hidden="true" />
+                                    <XMarkIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
                                 </button>
                             </div>
                         </div>
