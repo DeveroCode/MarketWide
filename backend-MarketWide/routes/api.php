@@ -24,3 +24,4 @@ Route::apiResource('/type_users', type_userController::class);
 
 //  Authentication
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);

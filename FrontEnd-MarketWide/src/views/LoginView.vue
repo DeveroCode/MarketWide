@@ -1,19 +1,38 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { reactive, ref } from 'vue';
+import { userMethods } from '../stores/userMethods'
+
+const { userLogin } = userMethods();
+const errores = ref([]);
+const user = reactive({
+    email: '',
+    password: ''
+});
+
+const handleSubmit = () => {
+    const data = {
+        email: user.email,
+        password: user.password
+    };
+
+    userLogin(data, errores);
+};
 </script>
 
 <template>
     <div class="mt-[-190px] flex items-center justify-center h-screen">
         <!-- Login Container -->
-        <div class="min-w-fit flex-col border bg-white px-6 py-14 shadow-md rounded-[4px] ">
+        <form class="min-w-fit flex-col border bg-white px-6 py-14 shadow-md rounded-[4px]" @submit.prevent="handleSubmit"
+            novalidate>
             <div class="mb-8 flex justify-center">
                 <h1 class="font-bold text-2xl">Inicia Sesión</h1>
             </div>
             <div class="flex flex-col text-sm rounded-md">
-                <input class="mb-5 rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-yellow-500 "
-                    type="text" placeholder="Username or Email id" />
-                <input class="border rounded-[4px] p-3 hover:outline-none focus:outline-none hover:border-yellow-500"
-                    type="password" placeholder="Password" />
+                <input class="mb-5 rounded-[4px] border p-3 hover:outline-none focus:outline-none hover:border-headers"
+                    type="email" placeholder="Email" v-model="user.email" />
+                <input class="border rounded-[4px] p-3 hover:outline-none focus:outline-none hover:border-headers"
+                    type="password" placeholder="Password" v-model="user.password" />
             </div>
             <button class="mt-5 w-full border p-2 bg-gradient-to-r from-secondary bg-headers text-white rounded-[4px]"
                 type="submit">Iniciar</button>
@@ -41,7 +60,7 @@ import { RouterLink } from 'vue-router';
                         nuestros servicios</a>
                 </p>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 
