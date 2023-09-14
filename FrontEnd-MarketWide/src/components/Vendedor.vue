@@ -1,12 +1,17 @@
 <script setup>
-import { userMethods } from '../stores/userMethods';
-const { user } = userMethods();
+import { ref, watchEffect } from 'vue';
+import { userMethods } from '../stores/userMethods.js';
 
-const reactive = user.name;
+const { dataUser } = userMethods();
+const users = ref([]);
 
-console.log(reactive);
+watchEffect(async () => {
+    dataUser(users);
+});
+
 </script>
 
 <template>
-    <h1>Vendedor ${reactive}</h1>
+    <h1>{{ users.name }}</h1>
+    <p>{{ users.email }}</p>
 </template>

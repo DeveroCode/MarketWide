@@ -1,25 +1,10 @@
 import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
-import useSWRV from 'swrv';
 import { print } from '../helpers/printErrors.js'
-import clienteApi from '../lib/axios';
 import APIservice from '../services/APIservice'
 
 export const userMethods = defineStore('users', () => {
     const router = useRouter();
-    const token = localStorage.getItem('AUTH_TOKEN'); // Obtiene el token del usuario registrado
-
-    const { data: user, error, mutate } = useSWRV('/api/user', () =>
-        clienteApi('/api/user', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(res => res.data) // Asegúrate de que la respuesta contenga la propiedad 'data'
-            .catch(error => {
-                throw Error(error?.response?.data?.errors)
-            })
-    );
 
     // Renderiza los tipos de usuario del backend
     async function types(users) {
@@ -28,6 +13,15 @@ export const userMethods = defineStore('users', () => {
             users.value = data.data;
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    async function dataUser(users) {
+        try {
+            const response = await APIservice.getUser();
+            users.value = response.data;
+        } catch (error) {
+            console.error('Error al obtener los datos del usuario:', error);
         }
     }
 
@@ -50,11 +44,10 @@ export const userMethods = defineStore('users', () => {
         }
     }
 
-
     return {
+        types,
         userRegister,
         userLogin,
-        types,
-        user
+        dataUser
     }
 });

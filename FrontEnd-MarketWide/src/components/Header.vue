@@ -1,9 +1,10 @@
 <script setup>
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import favicon from '../assets/imgs/favicon-white.png'
 import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
 import { useMenuMobile } from '../stores/menu.js'
-
+const token = ref(localStorage.getItem('AUTH_TOKEN'));
 const button = useMenuMobile();
 
 </script>
@@ -56,7 +57,8 @@ const button = useMenuMobile();
                 </div>
 
                 <nav class="flex flex-col text-white text-xl space-y-3">
-                    <RouterLink :to="{ name: 'login' }">Iniciar Sesión</RouterLink>
+                    <RouterLink :to="{ name: 'login' }" v-if="!token">Iniciar Sesión</RouterLink>
+                    <RouterLink :to="{ name: 'seller' }" v-else>Profile</RouterLink>
                     <RouterLink :to="{ name: 'register' }">Soporte</RouterLink>
                     <RouterLink :to="{ name: 'register' }" class="text-white font-bold flex items-center">
                         <ShoppingCartIcon class="w-8 h-8" aria-label="true" />
@@ -67,7 +69,8 @@ const button = useMenuMobile();
 
 
             <nav class="hidden md:flex md:space-x-16 md:items-center md:ml-6">
-                <RouterLink class="text-white font-bold" :to="{ name: 'login' }">Iniciar</RouterLink>
+                <RouterLink :to="{ name: 'login' }" class="text-white font-bold" v-if="!token">Iniciar Sesión</RouterLink>
+                <RouterLink :to="{ name: 'seller' }" class="text-white font-bold" v-else>Profile</RouterLink>
                 <RouterLink class="text-white font-bold" :to="{ name: 'register' }">Soporte</RouterLink>
                 <RouterLink class="text-white font-bold flex items-center" :to="{ name: 'register' }">
                     <ShoppingCartIcon class="w-8 h-8" aria-label="true" />

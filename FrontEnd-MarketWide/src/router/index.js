@@ -37,6 +37,7 @@ const router = createRouter({
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),
       meta: { requiresAuth: true },
+      props: true,
       children: [
         {
           path: 'seller',
@@ -53,15 +54,25 @@ const router = createRouter({
   ]
 })
 
+
 // Validar el tipo de usuario
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     if (isAuthenticated()) {
-      next({ name: 'seller' });
+      if (to.name === 'dashboard') {
+        // Si el usuario autenticado intenta acceder al dashboard,
+        // redirige a la vista "seller" en su lugar.
+        next({ name: 'seller' });
+      } else {
+        // En otras rutas autenticadas, permite el acceso.
+        next();
+      }
     } else {
-      next({ name: 'login' })
+      // Si no está autenticado, redirige a la página de inicio de sesión.
+      next({ name: 'login' });
     }
   } else {
+    // Para rutas que no requieren autenticación, permite el acceso.
     next();
   }
 });
