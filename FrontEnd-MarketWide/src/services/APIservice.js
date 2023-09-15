@@ -21,5 +21,13 @@ export default {
     },
     login(data) {
         return clienteApi.post('/api/login', data);
+    },
+    logOut() {
+        const token = localStorage.getItem('AUTH_TOKEN')
+        return clienteApi.post('/api/logout', null, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
     }
 }

@@ -43,11 +43,10 @@ export const userMethods = defineStore('users', () => {
             print(errores, error)
         }
     }
-
     return {
         types,
         userRegister,
         userLogin,
-        dataUser
+        dataUser,
     }
 });
