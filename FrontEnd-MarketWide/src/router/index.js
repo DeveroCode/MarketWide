@@ -40,14 +40,9 @@ const router = createRouter({
       props: true,
       children: [
         {
-          path: 'seller',
-          name: 'seller',
-          component: () => import('../components/Vendedor.vue'),
-        },
-        {
-          path: 'buyer',
-          name: 'buyer',
-          component: () => import('../components/Comprador.vue')
+          path: 'profile/update',
+          name: 'update',
+          component: () => import('../components/UpdateUser.vue'),
         }
       ]
     }
