@@ -26,6 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return new userResource($user);
     });
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::put('/update', [AuthController::class, 'update']);
 
     // Otras rutas protegidas que requieran autenticación
 });

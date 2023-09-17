@@ -1,11 +1,11 @@
 import clienteApi from "../lib/axios";
+const token = localStorage.getItem('AUTH_TOKEN');
 
 export default {
     type_user() {
         return clienteApi.get('/api/type_users')
     },
     getUser() {
-        const token = localStorage.getItem('AUTH_TOKEN')
         return clienteApi.get('/api/user', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -22,8 +22,14 @@ export default {
     login(data) {
         return clienteApi.post('/api/login', data);
     },
+    update(data) {
+        return clienteApi.put('/api/update', data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    },
     logOut() {
-        const token = localStorage.getItem('AUTH_TOKEN')
         return clienteApi.post('/api/logout', null, {
             headers: {
                 Authorization: `Bearer ${token}`
