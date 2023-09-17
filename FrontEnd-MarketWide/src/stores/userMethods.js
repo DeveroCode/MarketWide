@@ -18,8 +18,9 @@ export const userMethods = defineStore('users', () => {
 
     async function dataUser(users) {
         try {
-            const response = await APIservice.getUser();
-            users.value = response.data;
+            const { data } = await APIservice.getUser();
+            users.value = data.data;
+            console.log(users.value);
         } catch (error) {
             console.error('Error al obtener los datos del usuario:', error);
         }

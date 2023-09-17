@@ -5,7 +5,7 @@ import { computed } from 'vue';
 
 const router = useRoute();
 const auth = computed(() => {
-  return router.name === 'login' || router.name === 'register';
+  return router.name === 'login' || router.name === 'register' || router.name === 'update';
 });
 // Components
 import Header from './components/Header.vue';

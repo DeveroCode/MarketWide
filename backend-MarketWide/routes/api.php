@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\type_userController;
+use App\Http\Resources\userResource;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
     // Ruta para obtener los datos del usuario
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        $user = Auth::user();
+
+        return new userResource($user);
     });
     Route::post('/logout', [AuthController::class, 'logout']);
 

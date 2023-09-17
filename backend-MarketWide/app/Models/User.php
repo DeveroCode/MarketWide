@@ -49,6 +49,6 @@ class User extends Authenticatable
     // connection with foreing with type_user_table
     public function type()
     {
-        return $this->belongsTo(type_user::class);
+        return $this->belongsTo(type_user::class, 'type_user_id');
     }
 }
