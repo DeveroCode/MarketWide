@@ -6,13 +6,12 @@ import { useMenuMobile } from '../stores/menu';
 import { userMethods } from '../stores/userMethods.js';
 
 const { dataUser } = userMethods();
-const users = ref([]);
+const users = ref({});
 const button = useMenuMobile();
 
 watchEffect(async () => {
     dataUser(users);
 });
-
 </script>
 
 <template>
@@ -31,5 +30,5 @@ watchEffect(async () => {
     </header>
 
     <!-- Start menu -->
-    <MenuSeller />
+    <MenuSeller :users="users" />
 </template>

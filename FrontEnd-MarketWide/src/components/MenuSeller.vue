@@ -1,8 +1,15 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { useMenuMobile } from '../stores/menu';
-import { XMarkIcon, ShoppingBagIcon, BellAlertIcon, HomeIcon, TagIcon, HeartIcon, ClockIcon, AdjustmentsHorizontalIcon } from '@heroicons/vue/24/outline'
+import { ShoppingBagIcon, BellAlertIcon, HomeIcon, TagIcon, HeartIcon, ClockIcon, AdjustmentsHorizontalIcon, GiftTopIcon } from '@heroicons/vue/24/outline'
+
 const button = useMenuMobile();
+defineProps({
+    users: {
+        type: Object,
+        required: true
+    }
+});
 </script>
 
 <template>
@@ -25,11 +32,15 @@ const button = useMenuMobile();
             <RouterLink :to="{ name: 'home' }" class="text-white text-sm flex items-center gap-1">
                 <HomeIcon class="text-white font-bold w-5 h-5" /> Market Wide
             </RouterLink>
+            <RouterLink :to="{ name: 'update' }" class="text-white text-sm mt-5 flex items-center gap-1"
+                v-if="users.type_user !== 'comprador'">
+                <GiftTopIcon class="text-white font-bold w-5 h-5" /> Mis Productos
+            </RouterLink>
+            <RouterLink :to="{ name: 'register' }" class="text-sm flex items-center gap-1" v-else>
+                <ShoppingBagIcon class="text-white font-bold w-5 h-5 mb-1" /> Mis compras
+            </RouterLink>
             <RouterLink :to="{ name: 'login' }" class="text-sm flex items-center gap-1">
                 <BellAlertIcon class="text-white font-bold w-5 h-5" /> Notificaciones
-            </RouterLink>
-            <RouterLink :to="{ name: 'register' }" class="text-sm flex items-center gap-1">
-                <ShoppingBagIcon class="text-white font-bold w-5 h-5 mb-1" /> Mis compras
             </RouterLink>
             <RouterLink :to="{ name: 'update' }" class="text-white text-sm mt-5 flex items-center gap-1">
                 <HeartIcon class="text-white font-bold w-5 h-5" /> Favoritos
@@ -51,11 +62,15 @@ const button = useMenuMobile();
             <RouterLink :to="{ name: 'home' }" class="text-white text-sm flex items-center gap-1">
                 <HomeIcon class="text-white font-bold w-5 h-5" /> Market Wide
             </RouterLink>
+            <RouterLink :to="{ name: 'update' }" v-if="users.type_user !== 'comprador'"
+                class="text-white text-sm flex items-center gap-1">
+                <GiftTopIcon class="text-white font-bold w-5 h-5" /> Mis productos
+            </RouterLink>
+            <RouterLink :to="{ name: 'register' }" class="text-sm flex items-center gap-1 text-white" v-else>
+                <ShoppingBagIcon class="text-white font-bold w-5 h-5 mb-1" /> Mis compras
+            </RouterLink>
             <RouterLink :to="{ name: 'login' }" class="text-sm flex items-center gap-1 text-white">
                 <BellAlertIcon class="text-white font-bold w-5 h-5" /> Notificaciones
-            </RouterLink>
-            <RouterLink :to="{ name: 'register' }" class="text-sm flex items-center gap-1 text-white">
-                <ShoppingBagIcon class="text-white font-bold w-5 h-5 mb-1" /> Mis compras
             </RouterLink>
             <RouterLink :to="{ name: 'update' }" class="text-white text-sm flex items-center gap-1">
                 <HeartIcon class="text-white font-bold w-5 h-5" /> Favoritos

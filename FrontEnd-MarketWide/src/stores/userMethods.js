@@ -37,7 +37,7 @@ export const userMethods = defineStore('users', () => {
             notification.success = 'Tus datos han sido actualizados correctamente';
             notification.error = false;
         } catch (error) {
-            console.log(error.response.data.message);
+            print(errores, error)
         }
     }
 
@@ -55,7 +55,6 @@ export const userMethods = defineStore('users', () => {
         try {
             const { data } = await APIservice.getUser();
             users.value = data.data;
-            console.log(users.value);
         } catch (error) {
             console.error('Error al obtener los datos del usuario:', error);
         }
