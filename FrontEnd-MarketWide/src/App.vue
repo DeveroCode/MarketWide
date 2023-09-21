@@ -5,7 +5,7 @@ import { computed } from 'vue';
 
 const router = useRoute();
 const auth = computed(() => {
-  return router.name === 'login' || router.name === 'register' || router.name === 'update' || router.name === 'dashboard';
+  return router.matched.some(route => route.name === 'auth') || router.matched.some(route => route.name === 'dashboard');
 });
 import Header from './components/Header.vue';
 import Alert from './components/Alert.vue';
