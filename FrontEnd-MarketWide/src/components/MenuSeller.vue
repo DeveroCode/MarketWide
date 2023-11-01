@@ -32,7 +32,7 @@ defineProps({
             <RouterLink :to="{ name: 'home' }" class="text-white text-sm flex items-center gap-1">
                 <HomeIcon class="text-white font-bold w-5 h-5" /> Market Wide
             </RouterLink>
-            <RouterLink :to="{ name: 'update' }" class="text-white text-sm mt-5 flex items-center gap-1"
+            <RouterLink :to="{ name: 'mis-productos' }" class="text-white text-sm mt-5 flex items-center gap-1"
                 v-if="users.type_user !== 'comprador'">
                 <GiftTopIcon class="text-white font-bold w-5 h-5" /> Mis Productos
             </RouterLink>
@@ -62,7 +62,7 @@ defineProps({
             <RouterLink :to="{ name: 'home' }" class="text-white text-sm flex items-center gap-1">
                 <HomeIcon class="text-white font-bold w-5 h-5" /> Market Wide
             </RouterLink>
-            <RouterLink :to="{ name: 'update' }" v-if="users.type_user !== 'comprador'"
+            <RouterLink :to="{ name: 'mis-productos' }" v-if="users.type_user !== 'comprador'"
                 class="text-white text-sm flex items-center gap-1">
                 <GiftTopIcon class="text-white font-bold w-5 h-5" /> Mis productos
             </RouterLink>

@@ -43,6 +43,16 @@ const router = createRouter({
           path: 'profile/update',
           name: 'update',
           component: () => import('../components/UpdateUser.vue'),
+        },
+        {
+          path: 'mis-productos',
+          name: 'mis-productos',
+          component: () => import('../views/MisProductos.vue'),
+        },
+        {
+          path: 'nuevo-producto',
+          name: 'nuevo-producto',
+          component: () => import('../views/CrearProducto.vue')
         }
       ]
     }
