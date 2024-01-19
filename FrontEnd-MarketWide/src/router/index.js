@@ -61,25 +61,44 @@ const router = createRouter({
 
 
 // Validar el tipo de usuario
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
-    if (isAuthenticated()) {
-      if (to.name === 'dashboard') {
-        // Si el usuario autenticado intenta acceder al dashboard,
-        // redirige a la vista "seller" en su lugar.
-        next({ name: 'seller' });
-      } else {
-        // En otras rutas autenticadas, permite el acceso.
-        next();
-      }
-    } else {
-      // Si no está autenticado, redirige a la página de inicio de sesión.
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiresAuth) {
+//     if (isAuthenticated()) {
+//       if (to.name === 'dashboard') {
+//         // Si el usuario autenticado intenta acceder al dashboard,
+//         // redirige a la vista "seller" en su lugar.
+//         next({ name: 'seller' });
+//       } else {
+//         // En otras rutas autenticadas, permite el acceso.
+//         next();
+//       }
+//     } else {
+//       // Si no está autenticado, redirige a la página de inicio de sesión.
+//       next({ name: 'login' });
+//     }
+//   } else {
+//     // Para rutas que no requieren autenticación, permite el acceso.
+//     next();
+//   }
+// });
+
+// Observador - Observa a todos los usuarios y permite el acceso a lo que si tienen privilegios a ciertas rutas
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(url => url.meta.requiresAuth);
+
+  if (requiresAuth) {
+    //  si esta autenticado
+    try {
+      await isAuthenticated();
+      next();
+    } catch (error) {
+      console.log(error);
       next({ name: 'login' });
     }
   } else {
-    // Para rutas que no requieren autenticación, permite el acceso.
+    // no estas autenticado
     next();
   }
-});
+})
 
 export default router

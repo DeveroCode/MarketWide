@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\type_userController;
 use App\Http\Resources\userResource;
 use App\Models\User;
@@ -28,11 +30,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::put('/update', [AuthController::class, 'update']);
 
-    // Otras rutas protegidas que requieran autenticación
+    // Routes for create a new product
+    Route::post('/create-product', [ProductController::class, 'create']);
 });
-// show type_users in frontend
-Route::apiResource('/type_users', type_userController::class);
 
 //  Authentication
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+//  Other routers
+Route::apiResource('/estado', EstadoController::class);
+Route::apiResource('/type_users', type_userController::class);

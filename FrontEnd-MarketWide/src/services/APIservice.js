@@ -2,9 +2,6 @@ import clienteApi from "../lib/axios";
 const token = localStorage.getItem('AUTH_TOKEN');
 
 export default {
-    type_user() {
-        return clienteApi.get('/api/type_users')
-    },
     getUser() {
         return clienteApi.get('/api/user', {
             headers: {

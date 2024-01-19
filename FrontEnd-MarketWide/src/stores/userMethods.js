@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router';
 import { useNotificationsStore } from '../stores/notifications';
 import { print } from '../helpers/printErrors.js'
 import APIservice from '../services/APIservice'
+import Order from '../services/Order.js';
 
 export const userMethods = defineStore('users', () => {
     const router = useRouter();
@@ -44,7 +45,7 @@ export const userMethods = defineStore('users', () => {
     // Renderiza los tipos de usuario del backend
     async function types(users) {
         try {
-            const { data } = (await APIservice.type_user());
+            const { data } = (await Order.type_user());
             users.value = data.data;
         } catch (error) {
             console.error(error);
